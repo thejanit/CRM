@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br/>
+<a href="{% url 'homepage' %}" class="btn btn-info">Back</a>
+<br/><br/>
+<p>Here is the Individual records of our Customers or Clients in detail.</p>
+<hr>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title"><strong>{{ individual_record.customer_name }}</strong></h5>
+            <hr>
+            <p class="card-text">
+                <strong>Email ID: </strong>{{ individual_record.customer_email }}
+                <a href="#"><span class="glyphicon glyphicon-pencil"></span></a>                  
+            </p>
+            <p class="card-text">
+                <strong>Phone No: </strong>{{ individual_record.customer_phone }}
+                <a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
+            </p>
+            <p class="card-text">
+                <strong>Category: </strong>{{ individual_record.customer_category }}
+                <a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
+            </p>
+            <p class="card-text">
+                <strong>Joined Year: </strong>{{ individual_record.customer_joined_yr }}
+                <a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
+            </p>
+            <p class="card-text">
+                <strong>Address: </strong>{{ individual_record.customer_address }}
+                <a href="#"><span class="glyphicon glyphicon-pencil"></span></a>
+            </p>
+            <br><br>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Delete
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">{{ individual_record.customer_name }}</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure want to delete this record from system? 
+                            <br><br>
+                            <p><b>Note: </b>Once deleted it cannot be retrieved.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cancel</button>
+                            <a href="{% url 'delete-record' individual_record.id %}" class="btn btn-danger">Delete Permanently</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <a href="{% url 'update-record' individual_record.id %}" class="btn btn-warning">Update</a>
+        </div>
+    </div>
+
+{% endblock %}

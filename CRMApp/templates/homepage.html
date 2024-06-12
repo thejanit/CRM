@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Customer Records</h2>
+                <p>Here is the ALL records of our Customers or Clients in detail.</p>
+            </div>
+            <div class="col" style="margin-right: -830px; margin-top: 45px;">
+                <a href="{% url 'add-record' %}" type="submit" class="btn btn-info border-dark">Add More Records</a>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <table class="table table-striped table-hover table-bordered border-dark-subtle">
+        <thead class="table-dark">
+            <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email ID</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Address</th>
+            <th scope="col">Category</th>
+            <th scope="col">Joined Year</th>
+            <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in customer_data %}
+            <tr>
+                <td>{{ data.customer_name }}</td>
+                <td>{{ data.customer_email }}</td>
+                <td>{{ data.customer_phone }}</td>
+                <td>{{ data.customer_address }}</td>
+                <td>{{ data.customer_category }}</td>
+                <td>{{ data.customer_joined_yr }}</td>
+                <td><a href="{% url 'individual-record' data.id %}">+</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% else %}
+
+<div class="col-md-6 offset-md-3">
+    <br/>
+    <h1>Login yourself..</h1>
+    <br>
+    <form method="POST" action="{% url 'homepage' %}">
+
+        {% csrf_token %}
+
+        <form>
+            <div class="mb-3">
+            <input type="text" class="form-control" name="Username" placeholder="Enter your Username" required>
+            <br>
+            <div class="mb-3">
+            <input type="password" class="form-control" name="password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn btn-success">Login</button>
+        </form>
+
+    </form>
+</div>
+
+{% endif %}
+
+{% endblock %}

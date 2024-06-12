@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="text-bg-dark p-3">
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Add More Record</h2>
+                <p>Here is the form that you can use to add new records of our Customers or Clients into this amazing CRM Application.</p>
+            </div>
+            <div class="col" style="margin-right: -830px; margin-top: 45px;">
+                <a href="{% url 'homepage' %}" class="btn btn-info">Back</a>        
+            </div>
+        </div>
+    </div>
+
+    <form method="POST" action="{% url 'add-record' %}">
+
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Add Record</button>
+    </form>
+</div>
+
+{% endblock %}
